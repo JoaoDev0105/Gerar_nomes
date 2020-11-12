@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Palindrome</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+</head>
+<body>
+    <!-- Titulo da aplicação no Body -->
+    <h1>Paralavras aleatorias </h1> 
+    
+    
+    <script>
+        // Função para criar palavras aleatorias
+        function caracterAleatorio(tamanho) {
+            // declarando variavel letras para formar palvras armazenando dentro da variavel letras
+           var letras = 'ABCDEFGHIJKLMNOPQRSTUVWXTZ';
+           var aleatorio = ''; // criando uma variavel aleatorio para retorno dos dados
+           
+            // Laço for para efetuar a aconstrução de todas as palavras
+            for (var i = 0; i < tamanho; i++) {
+                /* declarando variavel palavra para executar calculo matemático para executar a função Math.floor para retornar a menor palavra 
+                * agora passando pela função Math.random como parametro para retornar um pesudo-aleatório com o intervalo definido pelas letras
+                * que por sua vez busca a variavel letras para buscar o tamanho dos dados
+                */
+              var palavra = Math.floor(Math.random() * letras.length);
+            /*  Agora que por sua vez pegamos a palavra aleatorio somamos mais a função que separa uma sequência de letras 
+            *   que passa como parametro da função a palavra gerada juntando mais uma vez a palavra e somando mais uma letra
+            */  
+            aleatorio += letras.substring(palavra, palavra + 1);
+
+            }
+            // retorno da palavra construida
+            return aleatorio;
+        }
+       
+       // Função para determinar se uma palavra gerada na função caracterAleatorio é uma palavra palindrome
+        function palinDrome(caracterAleatorio) {
+            // Criando uma variavel para armazenar a string da palavra reversa 
+            var reverseString = '';
+                // laço for que busca a quantidade de palavras geradas na função caracterAleatorio para comparar 
+                for (var palavraReversa in caracterAleatorio) {
+
+                    // verificando a as palavras geradas através da busca pelo metódo length menos a palavraReversa e subtraindo menos 1 caracter
+                    reverseString += caracterAleatorio[(caracterAleatorio.length - palavraReversa) - 1];
+                }
+                // Verificando através do if se as palavras são identicas
+                if (caracterAleatorio === reverseString) {
+                    // se true retorna está palavra é uma palindrome
+                    return [reverseString, 'Sim, é uma Palindrome']
+                } else {
+                    // se false retorna está palavra não será uma palindrome
+                    return [reverseString, 'Não, é palindrome']
+                }
+            }
+            
+            // Laço for para gerar quantas palavras serão construidas
+            for (let index = 0; index < 10000 ; index++) {
+            //    criando uma constante palavra e resultado para puxar os dados das funções palinDrome e caracterAleatorio
+                 const [setPalavra, setPalindrome] = palinDrome(caracterAleatorio(5)); 
+                
+            //    setando os resultados e imprimindo em tela.
+                document.write( `${setPalavra} - ${setPalindrome}` );
+                document.write("<br>"); // pular linha a cada requisição de dado
+            }
+    </script>
+</body>
+</html>
